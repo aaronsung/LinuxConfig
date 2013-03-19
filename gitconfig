@@ -1,0 +1,13 @@
+[alias]
+    br = branch
+    ci = commit
+    co = checkout
+    st = status 
+    info = cat-file commit HEAD
+    glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    gl = log --decorate --graph --pretty=oneline
+
+[core]
+    preloadindex = yes
+    #autocrlf = true
+    #safecrlf = true
