@@ -19,3 +19,5 @@ alias rails_generate_model="rails generate model"
 alias rails_generate_view="rails generate view"
 
 alias migrate="rake db:migrate"
+alias biwp="bundle install --without production"
+alias bi="bundle install"
