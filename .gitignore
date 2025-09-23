@@ -1,0 +1,29 @@
+# OS-specific metadata
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor swap and backup files
+*~
+*.swp
+*.swo
+*.swx
+*.tmp
+*.bak
+*.orig
+*.rej
+*.un~
+
+# Ruby tooling artifacts
+.bundle/
+vendor/bundle/
+
+# Cursor editor artifacts
+.cursor/
+.cursor-tmp/
+.cursorignore
