@@ -1,0 +1,28 @@
+## Terraform Coding Guidelines (AWS)
+
+- Use `terraform >= 1.6` (or repo standard) and pin `hashicorp/aws` provider versions.
+- Commit `.terraform.lock.hcl` whenever provider versions change.
+- Use AWS provider with explicit `region`; avoid implicit defaults.
+- For multi-account or multi-region code, use provider aliases and explicit `providers` mapping in modules.
+- Use remote state in S3 with encryption enabled and state locking enabled.
+- Keep state split by account/environment/region; never share one state across environments.
+- Never run `terraform apply` or `terraform destroy` unless explicitly requested.
+- Run `terraform fmt -recursive`, `terraform init -backend=false`, and `terraform validate` before handoff.
+- Run `tflint` with AWS ruleset (and `tfsec`/`checkov` if configured) on changed roots/modules.
+- Prefer `for_each` over `count` for resources that may be reordered.
+- Use explicit variable types, defaults only when safe, and validation rules.
+- Mark secrets as `sensitive = true`; never hardcode secrets in `.tf` or commit secret `.tfvars`.
+- Do not hardcode account IDs, ARNs, or partitions; use data sources (`aws_caller_identity`, `aws_partition`, `aws_region`) and variables.
+- Enforce standard tags via `default_tags` and require tags like `Environment`, `Owner`, `Application`, `CostCenter`.
+- Use deterministic naming via `locals`; keep naming consistent across modules.
+- IAM must follow least privilege; avoid wildcard `Action`/`Resource` unless justified in comments.
+- Prefer `aws_iam_policy_document` over raw JSON for IAM policies.
+- Security groups must be least-privilege; `0.0.0.0/0` ingress requires explicit justification.
+- Enable encryption and logging defaults (e.g., S3 encryption + public access block, CloudWatch retention).
+- Use `depends_on` only when implicit dependencies are insufficient; document why.
+- Use `lifecycle` only when necessary and document the risk/tradeoff.
+- Use `moved` blocks for renames/refactors to avoid unnecessary recreation.
+- Use `import` blocks when adopting existing AWS resources.
+- Keep plans reviewable: avoid unrelated refactors in the same PR.
+- PRs must include plan summary per environment: resources to add/change/destroy and notable risk.
+- Never commit `.terraform/`, `*.tfstate`, `*.tfstate.*`, or secret tfvars files.
